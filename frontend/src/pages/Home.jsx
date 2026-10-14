@@ -5,6 +5,8 @@ const heroImages =[
     '/images/hero-2.png',
     '/images/hero-3.png',
     '/images/hero-4.jpg',
+    '/images/hero-5.jpg',
+
 ]
 
 
