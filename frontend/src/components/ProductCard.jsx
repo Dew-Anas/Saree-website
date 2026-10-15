@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useFavourites } from "../context/FavouritesContext";
 
-import { Heart, ArrowRight } from "lucide-react";
+import { useCart } from "../context/CartContext";
+
+import { Heart, ShoppingCart } from "lucide-react";
 
 {
   /*gets prop from perant component */
 }
 function ProductCard({ product, className = "" }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const{isFavourite,toggleFavourite} =useFavourites();
+
+  const { addToCart } = useCart();
 
   return (
     <article className={`group min-w-0 ${className}`}>
       {/* Product Image */}
-      <div className="relative  overflow-hidden bg-surface">
+      <div className="relative overflow-hidden bg-surface">
         <img
           src={product.image}
           alt={product.name}
@@ -28,21 +32,22 @@ function ProductCard({ product, className = "" }) {
         {/* Wishlist Button */}
         <button
           type="button"
-          onClick={() => setIsFavorite(!isFavorite)}
-          aria-label={isFavorite ? "Remove from wishlist" : "Add to wishlist"}
+          onClick={() => toggleFavourite(product)}
+          aria-label={isFavourite (product.id) ? "Remove from wishlist" : "Add to wishlist"}
           className="absolute right-3 top-3 text-2xl text-white drop-shadow"
         >
           {/* whislist i con importyes */}
           <Heart
             size={22}
             strokeWidth={1.5}
-            fill={isFavorite ? "currentColor" : "none"}
-            className={isFavorite ? "text-burgundy" : "text-white"}
+            fill={isFavourite(product.id) ? "currentColor" : "none"}
+            className={isFavourite (product.id) ? "text-burgundy" : "text-white"}
           />
         </button>
       </div>
 
       {/* Product Details */}
+
       <div className="pt-3 pb-5">
         <p className="text-[10px] uppercase tracking-[0.2em] text-gold-text">
           {product.category}
@@ -55,17 +60,18 @@ function ProductCard({ product, className = "" }) {
             Rs. {product.price.toLocaleString("en-LK")}
           </p>
 
+         
+        </div>
+         {/* add to cart buttoun */}
+
           <button
             type="button"
-            aria-label={`View ${product.name}`}
-            onClick={() => {
-              console.log("Selected product:", product.name);
-            }}
-            className="text-xl text-gold-text transition-transform duration-300 hover:translate-x-1"
-          >
-            <ArrowRight size={20} strokeWidth={1.5} />
+            onClick={() => addToCart(product)}
+             className="mt-3 flex w-full items-center justify-center gap-2 bg-burgundy py-2.5 text-xs uppercase tracking-widest text-ivory transition-colors hover:bg-ink"
+              >
+            <ShoppingCart size={16} strokeWidth={1.5} />
+           Add to Cart
           </button>
-        </div>
       </div>
     </article>
   );

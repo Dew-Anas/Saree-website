@@ -2,7 +2,8 @@ import { Link, NavLink} from "react-router-dom"
 import { useState } from "react"
 import { FiHeart, FiShoppingCart, FiMenu, FiX } from "react-icons/fi";
 import logo from "../assets/logo.png"
-
+import { useFavourites } from "../context/FavouritesContext";
+import { useCart } from "../context/CartContext";
 
 const links =[
     {to: "/", label: "Home" },
@@ -13,6 +14,13 @@ const links =[
 
 function Navbar(){
     const [open, setOpen] =useState(false);
+
+    {/* nav bar heart icon cod details  */}
+    const { favourites } = useFavourites();
+
+    {/* nav bart cart icon number increase */}
+    const { cartCount } = useCart();
+
     return(
             //maincontent
         <header className="sticky top-0 z-50 border-b border-line bg-ivory">
@@ -48,12 +56,24 @@ function Navbar(){
 
                 <div className="flex items-center gap-4">
 
-                    <Link to="/favourites" className="text-ink hover:text-burgundy">
+                    <Link to="/favourites" className=" relative text-ink hover:text-burgundy">
                     <FiHeart size={22} />
+                    {favourites.length > 0 &&(
+                        <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-burgundy px-1 text-[10px] text-ivory">
+                        {favourites.length}
+                        </span>
+                        )}
                     </Link>
 
-                    <Link to="/cart" className="text-ink hover:text-burgundy">
+                    <Link to="/cart" className="relative text-ink hover:text-burgundy">
                      <FiShoppingCart size={22} />
+
+                     {/* cart icon number increase after add to crd buttun click */}
+                     {cartCount > 0 &&(
+                        <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-burgundy px-1 text-[10px] text-ivory">
+                            {cartCount}
+                        </span>
+                     )}
                     </Link>
 
 

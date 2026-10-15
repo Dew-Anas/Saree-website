@@ -12,7 +12,7 @@ function Footer(){
                 {/* 2nd div start */}
                 <div className="max-w-sm">
 
-                    <h2 className="text-2xl font-bold"> Saree Boutique</h2>
+                    <h2 className="text-2xl font-bold"> RSK  Ssrees</h2>
 
                     <p className="mt-2 text-sm opacity-80">Elegant sarees, woven with tradition and sty
                         led for today.</p>
@@ -30,7 +30,7 @@ function Footer(){
             {/*end div */}
 
             <p className="mt-8 border-t border-gold pt-4 text-xs opacity-70">
-            © {new Date().getFullYear()} Saree Boutique. All rights reserved.
+            © {new Date().getFullYear()} RSK Sarees. All rights reserved.
             </p>
 
         </footer>

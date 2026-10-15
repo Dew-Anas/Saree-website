@@ -30,13 +30,15 @@ function Shop() {
 
     </section>
 
-      <div className="mt-8 grid grid-cols-2 gap-4 md:gap-6">
+
+    {/*Grid section */}
+      <div className="mt-8 grid grid-cols-2   gap-4 md:gap-6">
         {products.map((product, index) => (
           <div
             key={product.id}
             className={
               index === 0
-                ? "row-span-2"
+                ? "row-span-1"
                 : "col-span-1"
             }
           >
