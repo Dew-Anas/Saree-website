@@ -30,7 +30,7 @@ export const products = [
     id: 4,
     name: "Rose Pink Satin Saree",
     price: 20000,
-    category: "Georgette",
+    category: "Silk",
     image: "/images/saree-4.png",
     isNew: true
   },
@@ -48,7 +48,7 @@ export const products = [
     id: 6,
     name: "Cotton Border saree",
     price: 28000,
-    category: "Georgette",
+    category: "Cotton",
     image: "/images/saree-6.png",
     isNew: false
   },
@@ -66,7 +66,7 @@ export const products = [
     id: 8,
     name: "Gold Satin Saree",
     price: 25000,
-    category: "Georgette",
+    category: "Silk",
     image: "/images/saree-8.png",
     isNew: false
   },
@@ -84,7 +84,7 @@ export const products = [
     id: 10,
     name: "White silk",
     price: 15000,
-    category: "Georgette",
+    category: "Silk",
     image: "/images/saree-10.png",
     isNew: true
   },
