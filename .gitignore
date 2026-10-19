@@ -1,0 +1,20 @@
+# Environment secrets
+backend/.env
+backend/.env.*
+!backend/.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Dependencies
+backend/node_modules/
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+.env
+backend/.env
+
+
+echo .env>> .gitignore
+echo backend/.env>> .gitignore

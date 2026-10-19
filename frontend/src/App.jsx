@@ -8,6 +8,7 @@ import Contact from './pages/Contact'
 import Favourites from './pages/Favourites'
 import Cart from './pages/Cart'
 import AnnouncementBar from './components/AnnouncementBar'
+import Login from './pages/Login'
 
 
 
@@ -24,13 +25,17 @@ function App() {
 
       <main className="flex-1">
       <Routes>
+
           <Route path='/' element={<Home/>}/>
           <Route path='/shop' element={<Shop/>}/>
           <Route path='/about' element={<About/>}/>
           <Route path='/contact' element={<Contact/>}/>
           <Route path='/favourites' element={<Favourites/>}/>
           <Route path='cart' element={<Cart/>}/>
+          <Route path="/login" element={<Login/>}/>
+          
       </Routes>
+          
       </main>
         
       <Footer/>
