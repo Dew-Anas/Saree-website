@@ -8,11 +8,50 @@ import {
   Trash2,
 } from "lucide-react";
 
+import { useState } from "react";
+
 import { useCart } from "../context/CartContext";
 
 function Cart() {
   const { cartItems, addToCart, decreaseQuantity, removeFromCart, cartTotal } =
     useCart();
+
+  const [checkingOut, setCheckingOut] = useState(false);
+  const [checkoutError, setCheckoutError] = useState("");
+
+  const handleCheckout = async () => {
+    setCheckingOut(true);
+    setCheckoutError("");
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/checkout/create-session`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            items: cartItems.map((item) => ({
+              id: item.id,
+              quantity: item.quantity,
+            })),
+          }),
+        },
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setCheckoutError(data.message || "Checkout failed");
+        setCheckingOut(false);
+        return;
+      }
+
+      window.location.href = data.url;
+    } catch {
+      setCheckoutError("Could not reach the server. Please try again.");
+      setCheckingOut(false);
+    }
+  };
 
   const itemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
@@ -34,7 +73,7 @@ function Cart() {
           />
 
           <h1 className="mt-5 font-serif text-3xl text-burgundy md:text-5xl">
-            Something beautiful belongs here. 
+            Something beautiful belongs here.
           </h1>
 
           <p className="mx-auto mt-4 max-w-md text-sm leading-7 text-muted">
@@ -219,19 +258,31 @@ function Cart() {
 
           <button
             type="button"
+            onClick={handleCheckout}
+            disabled={checkingOut || cartItems.length === 0}
             className="group mt-7 flex w-full items-center justify-between
                        bg-burgundy px-5 py-4 text-sm text-ivory
                        transition-colors duration-300 hover:bg-ink"
           >
-            <span>Proceed to checkout</span>
+            <span>
+              {checkingOut
+                ? "Connecting to checkout..."
+                : "Proceed to checkout"}
+            </span>
 
             <ArrowRight
               size={17}
               strokeWidth={1.5}
               className="transition-transform duration-300
-                         group-hover:translate-x-1"
+              group-hover:translate-x-1"
             />
           </button>
+
+          {checkoutError && (
+            <p role="alert" className="mt-3 text-sm text-red-600">
+              {checkoutError}
+            </p>
+          )}
 
           <p className="mt-4 text-center text-xs leading-6 text-muted">
             Thoughtfully chosen. Beautifully yours.

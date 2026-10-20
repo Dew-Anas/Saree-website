@@ -32,6 +32,10 @@ export function CartProvider({ children }) {
     setCartItems(cartItems.filter((item) => item.id !== id));
   };
 
+  const clearCart = () => {
+  setCartItems([]);
+};
+
    {/*  decrees card quantity */}
 
    const decreaseQuantity = (id) => {
@@ -59,7 +63,9 @@ export function CartProvider({ children }) {
          removeFromCart, 
          cartCount,
         decreaseQuantity,
-        cartTotal }}
+        cartTotal,
+        clearCart
+       }}
     >
       {children}
     </CartContext.Provider>

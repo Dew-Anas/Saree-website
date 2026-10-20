@@ -4,6 +4,7 @@ import { FiHeart, FiShoppingCart, FiMenu, FiX } from "react-icons/fi";
 import logo from "../assets/logo.png"
 import { useFavourites } from "../context/FavouritesContext";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 const links =[
     {to: "/", label: "Home" },
@@ -20,6 +21,8 @@ function Navbar(){
 
     {/* nav bart cart icon number increase */}
     const { cartCount } = useCart();
+
+    const {user, logout} = useAuth();
 
     return(
             //maincontent
@@ -65,7 +68,7 @@ function Navbar(){
                         )}
                     </Link>
 
-                    <Link to="/cart" className="relative text-ink hover:text-burgundy">
+                    <Link to="/cart" className="relative text-ink hover:text-burgundy gap-3">
                      <FiShoppingCart size={22} />
 
                      {/* cart icon number increase after add to crd buttun click */}
@@ -75,6 +78,39 @@ function Navbar(){
                         </span>
                      )}
                     </Link>
+
+                    
+
+                    {user ? (
+                        <div div className="flex items-center gap-4">
+                            <img
+                             src={user.picture}
+                             alt={user.name}
+                             referrerPolicy="no-referrer"
+                             className="h-8 w-8 rounded-full object-cover gap-3" />
+                             <span className="hidden text-sm text-ink md:inline gap-2">
+                                {user.name}
+                             </span>
+                             <button
+                              onClick={logout}
+                              className="rounded-md border border-burgundy px-3 py-1 text-sm text-burgundy transition hover:bg-burgundy hover:text-white"
+                              >
+                                Logout
+
+                             </button>
+
+                             </div>
+                    ):(
+                        <NavLink
+                         to="/login"
+                          className="rounded-md bg-burgundy px-4 py-1.5 text-sm text-white transition hover:opacity-90">
+
+                            Login
+
+                        </NavLink>
+
+                    )}
+                   
 
 
 
